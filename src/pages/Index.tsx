@@ -1,9 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Palette, Smartphone, Globe, GitBranch, Database } from 'lucide-react';
+import {
+  Code,
+  ExternalLink,
+  GitBranch,
+  Github,
+  Globe,
+  Linkedin,
+  Mail,
+  Menu,
+  Palette,
+  Smartphone,
+  X,
+} from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 interface FormData {
   name: string;
-  email: string;
+  email: string; 
   message: string;
 }
 
@@ -16,13 +28,17 @@ interface FormErrors {
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    message: "",
+  });
   const [showThankYou, setShowThankYou] = useState(false);
   const [formErrors, setFormErrors] = useState<FormErrors>({});
 
   useEffect(() => {
     // Check for saved dark mode preference
-    const savedMode = localStorage.getItem('darkMode');
+    const savedMode = localStorage.getItem("darkMode");
     if (savedMode) {
       setIsDarkMode(JSON.parse(savedMode));
     }
@@ -31,11 +47,11 @@ const Index = () => {
   useEffect(() => {
     // Apply dark mode to document
     if (isDarkMode) {
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
     }
-    localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
+    localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
   }, [isDarkMode]);
 
   const toggleMenu = () => {
@@ -49,7 +65,7 @@ const Index = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
     setIsMenuOpen(false);
   };
@@ -64,54 +80,62 @@ const Index = () => {
     const errors: FormErrors = {};
 
     if (!formData.name.trim()) {
-      errors.name = 'Name is required';
+      errors.name = "Name is required";
     }
     if (!formData.email.trim()) {
-      errors.email = 'Email is required';
+      errors.email = "Email is required";
     } else if (!validateEmail(formData.email)) {
-      errors.email = 'Please enter a valid email';
+      errors.email = "Please enter a valid email";
     }
     if (!formData.message.trim()) {
-      errors.message = 'Message is required';
+      errors.message = "Message is required";
     }
 
     setFormErrors(errors);
 
     if (Object.keys(errors).length === 0) {
       setShowThankYou(true);
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: "", email: "", message: "" });
       setTimeout(() => setShowThankYou(false), 5000);
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     // Clear error when user starts typing
     if (formErrors[name as keyof FormErrors]) {
-      setFormErrors(prev => ({ ...prev, [name]: '' }));
+      setFormErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
   const projects = [
     {
       title: "E-Commerce Platform",
-      description: "A modern e-commerce website built with React and Tailwind CSS, featuring responsive design and smooth animations.",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop",
-      link: "#"
+      description:
+        "A modern e-commerce website built with React and Tailwind CSS, featuring responsive design and smooth animations.",
+      image:
+        "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop",
+      link: "#",
     },
     {
       title: "Task Management App",
-      description: "A sleek task management application with drag-and-drop functionality and real-time updates.",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=400&fit=crop",
-      link: "#"
+      description:
+        "A sleek task management application with drag-and-drop functionality and real-time updates.",
+      image:
+        "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=400&fit=crop",
+      link: "#",
     },
     {
       title: "Portfolio Website",
-      description: "A responsive portfolio website showcasing modern design principles and advanced CSS animations.",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
-      link: "#"
-    }
+      description:
+        "A responsive portfolio website showcasing modern design principles and advanced CSS animations.",
+      image:
+        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
+      link: "#",
+    },
   ];
 
   const skills = [
@@ -120,7 +144,7 @@ const Index = () => {
     { name: "JavaScript", icon: <Globe className="w-6 h-6" /> },
     { name: "React", icon: <Smartphone className="w-6 h-6" /> },
     { name: "Tailwind CSS", icon: <Palette className="w-6 h-6" /> },
-    { name: "Git", icon: <GitBranch className="w-6 h-6" /> }
+    { name: "Git", icon: <GitBranch className="w-6 h-6" /> },
   ];
 
   return (
@@ -130,41 +154,60 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="text-2xl font-bold text-gray-800 dark:text-white">
-              Alex Morgan
+              Imran ali rony
             </div>
-            
+
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
-              <button onClick={() => scrollToSection('home')} className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              <button
+                onClick={() => scrollToSection("home")}
+                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
                 Home
               </button>
-              <button onClick={() => scrollToSection('projects')} className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              <button
+                onClick={() => scrollToSection("projects")}
+                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
                 Projects
               </button>
-              <button onClick={() => scrollToSection('about')} className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              <button
+                onClick={() => scrollToSection("about")}
+                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
                 About
               </button>
-              <button onClick={() => scrollToSection('contact')} className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
                 Contact
               </button>
-              <button 
+              <button
                 onClick={toggleDarkMode}
                 className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               >
-                {isDarkMode ? '☀️' : '🌙'}
+                {isDarkMode ? "☀️" : "🌙"}
               </button>
             </div>
 
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center space-x-2">
-              <button 
+              <button
                 onClick={toggleDarkMode}
                 className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300"
               >
-                {isDarkMode ? '☀️' : '🌙'}
+                {isDarkMode ? "☀️" : "🌙"}
               </button>
-              <button onClick={toggleMenu} className="text-gray-600 dark:text-gray-300">
-                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              <button
+                onClick={toggleMenu}
+                className="text-gray-600 dark:text-gray-300"
+              >
+                {isMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
               </button>
             </div>
           </div>
@@ -173,16 +216,28 @@ const Index = () => {
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t border-gray-200 dark:border-gray-700">
               <div className="flex flex-col space-y-4">
-                <button onClick={() => scrollToSection('home')} className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-left">
+                <button
+                  onClick={() => scrollToSection("home")}
+                  className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-left"
+                >
                   Home
                 </button>
-                <button onClick={() => scrollToSection('projects')} className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-left">
+                <button
+                  onClick={() => scrollToSection("projects")}
+                  className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-left"
+                >
                   Projects
                 </button>
-                <button onClick={() => scrollToSection('about')} className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-left">
+                <button
+                  onClick={() => scrollToSection("about")}
+                  className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-left"
+                >
                   About
                 </button>
-                <button onClick={() => scrollToSection('contact')} className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-left">
+                <button
+                  onClick={() => scrollToSection("contact")}
+                  className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-left"
+                >
                   Contact
                 </button>
               </div>
@@ -192,25 +247,29 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-100 via-white to-blue-50 dark:from-gray-800 dark:via-gray-900 dark:to-blue-900 pt-20">
+      <section
+        id="home"
+        className="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-100 via-white to-blue-50 dark:from-gray-800 dark:via-gray-900 dark:to-blue-900 pt-20"
+      >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="animate-fade-in">
-            <img 
-              src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=300&h=300&fit=crop&crop=face"
-              alt="Alex Morgan"
+            <img
+              src="https://avatars.githubusercontent.com/u/198342311?v=4"
+              alt="Imran ali rony"
               className="w-48 h-48 rounded-full mx-auto mb-8 shadow-2xl object-cover border-4 border-white dark:border-gray-700"
             />
             <h1 className="text-5xl md:text-7xl font-bold text-gray-800 dark:text-white mb-4">
-              Alex Morgan
+              Imran ali rony
             </h1>
             <h2 className="text-2xl md:text-3xl text-blue-600 dark:text-blue-400 mb-6 font-light">
               Creative Front-End Developer
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-              I build sleek, responsive websites with clean code and clear purpose.
+              I build sleek, responsive websites with clean code and clear
+              purpose.
             </p>
-            <button 
-              onClick={() => scrollToSection('projects')}
+            <button
+              onClick={() => scrollToSection("projects")}
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
             >
               View My Work
@@ -227,11 +286,11 @@ const Index = () => {
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <div 
+              <div
                 key={index}
                 className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 overflow-hidden group"
               >
-                <img 
+                <img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
@@ -243,7 +302,7 @@ const Index = () => {
                   <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
                     {project.description}
                   </p>
-                  <a 
+                  <a
                     href={project.link}
                     className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold transition-colors"
                   >
@@ -266,20 +325,24 @@ const Index = () => {
               </h2>
               <div className="space-y-6 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 <p>
-                  I'm a passionate front-end developer with over 5 years of experience creating 
-                  beautiful, functional websites that deliver exceptional user experiences. 
-                  My journey in web development started with a curiosity about how websites work, 
-                  and it has evolved into a deep love for crafting digital experiences.
+                  I'm a passionate front-end developer with over 5 years of
+                  experience creating beautiful, functional websites that
+                  deliver exceptional user experiences. My journey in web
+                  development started with a curiosity about how websites work,
+                  and it has evolved into a deep love for crafting digital
+                  experiences.
                 </p>
                 <p>
-                  I specialize in modern web technologies including React, JavaScript, and CSS frameworks. 
-                  I believe in writing clean, maintainable code and staying up-to-date with the latest 
+                  I specialize in modern web technologies including React,
+                  JavaScript, and CSS frameworks. I believe in writing clean,
+                  maintainable code and staying up-to-date with the latest
                   industry trends and best practices.
                 </p>
                 <p>
-                  When I'm not coding, you can find me exploring new design trends, contributing to 
-                  open-source projects, or sharing knowledge with the developer community through 
-                  blog posts and mentoring.
+                  When I'm not coding, you can find me exploring new design
+                  trends, contributing to open-source projects, or sharing
+                  knowledge with the developer community through blog posts and
+                  mentoring.
                 </p>
               </div>
             </div>
@@ -289,7 +352,7 @@ const Index = () => {
               </h3>
               <div className="grid grid-cols-2 gap-6">
                 {skills.map((skill, index) => (
-                  <div 
+                  <div
                     key={index}
                     className="flex items-center space-x-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
@@ -327,7 +390,10 @@ const Index = () => {
             ) : (
               <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  >
                     Name
                   </label>
                   <input
@@ -337,16 +403,21 @@ const Index = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors dark:bg-gray-800 dark:border-gray-600 dark:text-white ${
-                      formErrors.name ? 'border-red-500' : 'border-gray-300'
+                      formErrors.name ? "border-red-500" : "border-gray-300"
                     }`}
                     placeholder="Your name"
                   />
                   {formErrors.name && (
-                    <p className="text-red-500 text-sm mt-1">{formErrors.name}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {formErrors.name}
+                    </p>
                   )}
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  >
                     Email
                   </label>
                   <input
@@ -356,16 +427,21 @@ const Index = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors dark:bg-gray-800 dark:border-gray-600 dark:text-white ${
-                      formErrors.email ? 'border-red-500' : 'border-gray-300'
+                      formErrors.email ? "border-red-500" : "border-gray-300"
                     }`}
                     placeholder="your.email@example.com"
                   />
                   {formErrors.email && (
-                    <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {formErrors.email}
+                    </p>
                   )}
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  >
                     Message
                   </label>
                   <textarea
@@ -375,12 +451,14 @@ const Index = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors dark:bg-gray-800 dark:border-gray-600 dark:text-white ${
-                      formErrors.message ? 'border-red-500' : 'border-gray-300'
+                      formErrors.message ? "border-red-500" : "border-gray-300"
                     }`}
                     placeholder="Tell me about your project..."
                   />
                   {formErrors.message && (
-                    <p className="text-red-500 text-sm mt-1">{formErrors.message}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {formErrors.message}
+                    </p>
                   )}
                 </div>
                 <button
@@ -392,16 +470,25 @@ const Index = () => {
               </form>
             )}
           </div>
-          
+
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mt-12">
-            <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <a
+              href="#"
+              className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
               <Github className="w-8 h-8" />
             </a>
-            <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <a
+              href="#"
+              className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
               <Linkedin className="w-8 h-8" />
             </a>
-            <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <a
+              href="#"
+              className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
               <Mail className="w-8 h-8" />
             </a>
           </div>
@@ -412,7 +499,7 @@ const Index = () => {
       <footer className="bg-white dark:bg-gray-900 py-8 border-t border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-gray-600 dark:text-gray-400">
-            © 2024 Alex Morgan. Built with React and Tailwind CSS.
+            © 2024 Imran ali rony. Built with React and Tailwind CSS.
           </p>
         </div>
       </footer>
